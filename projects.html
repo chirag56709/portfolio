@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects | Chirag</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="images/log2.webp" loading="lazy" alt="Logo" width="40" height="40" class="rounded-circle me-2 border border-info">
+        <strong>Chirag</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav gap-3">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="skills.html">Skills</a></li>
+          <li class="nav-item"><a class="nav-link active" href="projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="resume.html">Resume</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+          <li class="nav-item"><a class="nav-link active" href="gallery.html">Gallery</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Projects Section -->
+  <section class="py-5 bg-light text-center">
+    <div class="container">
+      <h1 class="mb-5 text-primary fw-bold">✨ My Projects</h1>
+
+      <!-- Filter Buttons -->
+      <div class="mb-4 d-flex flex-wrap justify-content-center gap-3">
+        <button class="btn btn-outline-primary filter-btn active" data-tech="all">All</button>
+        <button class="btn btn-outline-secondary filter-btn" data-tech="html">HTML</button>
+        <button class="btn btn-outline-secondary filter-btn" data-tech="js">JS</button>
+        <button class="btn btn-outline-secondary filter-btn" data-tech="php">PHP</button>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+
+        <!-- Blood Bank App -->
+        <div class="col-md-4 project-card" data-tech="html php">
+          <div class="card shadow-sm h-100 border-0">
+            <div class="card-body">
+              <h5 class="card-title text-primary">Blood Bank App</h5>
+              <p class="card-text">A platform to connect blood donors and receivers with real-time updates.</p>
+              <span class="badge bg-info text-dark mb-3">HTML, CSS, PHP, XAMPP</span><br>
+              <a href="https://github.com/chirag56709/Bloodbank" class="btn btn-outline-primary mt-2" target="_blank">View Project</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calculator App -->
+        <div class="col-md-4 project-card" data-tech="html js">
+          <div class="card shadow-sm h-100 border-0">
+            <div class="card-body">
+              <h5 class="card-title text-primary">Calculator App</h5>
+              <p class="card-text">A responsive calculator for basic operations with clean UI.</p>
+              <span class="badge bg-warning text-dark mb-3">HTML, CSS, JavaScript</span><br>
+              <a href="https://github.com/chirag56709/calculatorapp" class="btn btn-outline-primary mt-2" target="_blank">View Project</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    <p class="mb-0">© 2025 Chirag | All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript: Filter & Scroll Animation -->
+  <script>
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const projectCards = document.querySelectorAll(".project-card");
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        filterButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const tech = btn.getAttribute("data-tech");
+
+        projectCards.forEach(card => {
+          const cardTech = card.getAttribute("data-tech");
+          if (tech === "all" || cardTech.includes(tech)) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      });
+    });
+
+    // Scroll animation
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show-card");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    projectCards.forEach(card => {
+      card.classList.add("hidden-card");
+      observer.observe(card);
+    });
+  </script>
+</body>
+</html>
